@@ -26,6 +26,8 @@ export default {
 .jumbotron{
   background: rgb(143, 132, 132);
   color: rgb(6, 6, 19);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
 }
 .foto{
   margin-top: 0%;

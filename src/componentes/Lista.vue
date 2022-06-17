@@ -4,13 +4,13 @@
      <div class="jumbotron">
       <h2><i> Autos ingresados</i></h2>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Fecha</th>
-      <th scope="col">Patente</th>
-      <th scope="col">Pago</th>
-    
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Patente</th>
+        <th scope="col">Pago</th>
+      
     </tr>
   </thead>
   <tbody>
@@ -23,7 +23,7 @@
     
     </tr>
   </tbody>
-</table>
+    </table>
 
       <hr>
       <br>
@@ -58,7 +58,7 @@
 
 <style scoped lang="css">
   .jumbotron{
-    background-color: rgb(219, 221, 207);
+    background-color: rgb(216, 239, 237);
     color:black;
   }
 
