@@ -7,29 +7,29 @@
       <br>
 
       <vue-form :state="formstate" @submit.prevent="enviar()">
-        
-        
-        <validate tag="div">
-          <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" v-model="formData.nombre" required name="nombre" autocomplete="off" class="form-control" />
-    
-          <field-messages name="nombre" show="$dirty">
-            <div slot="required" class="alert alert-danger mt-1">Este campo es obligatorio</div>
-          </field-messages>
-        </validate>
-        <br>
-
+      
         
         <validate tag="div">
           <label for="patente">Patente</label>
-          <input type="text" id="patente" v-model="formData.patente" required name="patente" autocomplete="off" class="form-control" />
-    
+          <input 
+            type="text"
+            id="patente"
+            name="patente" 
+            class="form-control"
+            autocomplete="off"
+            v-model.trim="formData.patente" 
+            required 
+            :minlength="patenteMinLength"
+            :maxlength="patenteMaxLength"
+          />          
           <field-messages name="patente" show="$dirty">
             <div slot="required" class="alert alert-danger mt-1">Este campo es obligatorio</div>
+            <div slot="minlength" class="alert alert-danger mt-1">
+              La patente debe ser mínimo de {{patenteMinLength}} caracteres
+            </div>
           </field-messages>
         </validate>
         <br>
-      
         
 
         <button class="btn btn-success my-3" :disabled="formstate.$invalid" type="submit">Enviar</button>
@@ -55,31 +55,24 @@
       return {
         formstate : {},
         formData : this.getInitialData(),
-        gastos : []
+        vehiculos: ["Moto", "Auto","Camioneta"],
+        patenteMinLength : 6,
+        patenteMaxLength : 7,
       }
     },
     methods: {
       getInitialData() {
         return {
-          nombre : null,
-          dni: null,
-          deuda: null,
-          pago: null
+          patente: null,
+          tipoDeVehiculo: null
         }
       },
       enviar() {
-        let gasto = {...this.formData}
-        gasto.fecha = new Date().toLocaleString()
-
-        console.log(gasto)
-        this.gastos.push(gasto)
-
         this.formData = this.getInitialData()
         this.formstate._reset()
+        console.log(this.formData)
       },
-      analizarSaldo() {
-       return 200
-      }
+      
     },
     computed: {
     }
@@ -94,8 +87,8 @@
   }
 
   .jumbotron {
-    background-color: #b9dde0;
-    color:rgb(32, 31, 107);
+    background-color: #d5e5ec;
+    color:black;
     border: 2px inset rgb(0,0,0,0.5);
   }
 

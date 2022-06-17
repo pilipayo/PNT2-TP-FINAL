@@ -33,11 +33,8 @@
           />          
           <field-messages name="patente" show="$dirty">
             <div slot="required" class="alert alert-danger mt-1">Este campo es obligatorio</div>
-            <div slot="min" class="alert alert-danger mt-1">
+            <div slot="minlength" class="alert alert-danger mt-1">
               La patente debe ser mínimo de {{patenteMinLength}} caracteres
-            </div>
-            <div slot="max" class="alert alert-danger mt-1">
-               La patente debe ser mínimo de {{patenteMaxLength}} caracteres
             </div>
           </field-messages>
         </validate>
@@ -67,7 +64,6 @@
       return {
         formstate : {},
         formData : this.getInitialData(),
-        gastos : [],
         vehiculos: ["Moto", "Auto","Camioneta"],
         patenteMinLength : 6,
         patenteMaxLength : 7,
@@ -81,19 +77,10 @@
         }
       },
       enviar() {
-        let gasto = {...this.formData}
-        gasto.fecha = new Date().toLocaleString()
-
-        console.log(gasto)
-        this.gastos.push(gasto)
-
         this.formData = this.getInitialData()
         this.formstate._reset()
         console.log(this.formData)
       },
-      analizarSaldo() {
-       return 200
-      }
     },
     computed: {
     }
@@ -108,8 +95,8 @@
   }
 
   .jumbotron {
-    background-color: #b9dde0;
-    color:rgb(32, 31, 107);
+    background-color: rgb(215, 233, 228);
+    color:rgb(0, 0, 0);
     border: 2px inset rgb(0,0,0,0.5);
   }
 

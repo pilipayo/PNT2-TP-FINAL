@@ -57,7 +57,10 @@
 </script>
 
 <style scoped lang="css">
-  .src-componentes-lista {
-
+  .jumbotron{
+    background-color: rgb(219, 221, 207);
+    color:black;
   }
+
+
 </style>
