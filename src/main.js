@@ -1,19 +1,22 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from "vue";
+import App from "./App.vue";
 
-import 'bootstrap/dist/css/bootstrap.min.css'  
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import 'jquery'
-import 'popper.js'
-import 'bootstrap'
+import "jquery";
+import "popper.js";
+import "bootstrap";
 
+Vue.config.productionTip = false;
 
-Vue.config.productionTip = false
+import { router } from "./router";
+import "./form";
+import "./axios";
 
-import { router } from './router'
-import './form'
+import store from "./store";
 
 new Vue({
   router,
-  render: h => h(App),
-}).$mount('#app')
+  store,
+  render: (h) => h(App),
+}).$mount("#app");

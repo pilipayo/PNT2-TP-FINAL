@@ -1,4 +1,4 @@
-import Vue from 'vue'
-import VueForm from 'vue-form'
+import Vue from "vue";
+import VueForm from "vue-form";
 
-Vue.use(VueForm)
+Vue.use(VueForm);
