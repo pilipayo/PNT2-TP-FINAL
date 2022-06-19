@@ -16,7 +16,7 @@
           <field-messages name="patente" show="$dirty">
             <div slot="required" class="alert alert-danger mt-1">Este campo es obligatorio</div>
             <div slot="minlength" class="alert alert-danger mt-1">
-              La patente debe ser mínimo de {{ patenteMinLength }} caracteres
+              La patente debe tener mínimo de {{ patenteMinLength }} caracteres
             </div>
           </field-messages>
         </validate>
