@@ -29,11 +29,22 @@ export default new Vuex.Store({
     },
     async egresoVehiculo({ commit }, patente) {
       try {
-        await axios.put(`${APIURL}/vehiculos/${patente}`, {
-          "content-type": "application/json",
-        });
-        commit("setStatus", true);
-        return true;
+        let statusFindPatente;
+        try {
+          const { status } = await axios.get(`${APIURL}/vehiculos/${patente}`);
+          statusFindPatente = status;
+        } catch (e) {
+          console.log(e);
+        }
+        if (statusFindPatente !== 404) {
+          await axios.put(`${APIURL}/vehiculos/${patente}`, {
+            "content-type": "application/json",
+          });
+          commit("setStatus", true);
+          return true;
+        } else {
+          return false;
+        }
       } catch (e) {
         console.error(e.message);
         commit("setStatus", false);
