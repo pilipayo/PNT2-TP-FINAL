@@ -11,6 +11,7 @@ export default new Vuex.Store({
     status: true,
     montoAPagar: 0,
     registros: [],
+    vehiculo: null,
   },
   actions: {
     async postVehiculo({ commit }, vehiculo) {
@@ -27,22 +28,43 @@ export default new Vuex.Store({
         return false;
       }
     },
+
+    limpiarMonto({ commit }) {
+      commit("setMontoAPagar", 0);
+    },
     async egresoVehiculo({ commit }, patente) {
       try {
-        await axios.put(`${APIURL}/vehiculos/${patente}`, {
-          "content-type": "application/json",
-        });
-        commit("setStatus", true);
-        return true;
+        let statusFindPatente;
+        try {
+          const { data, status } = await axios.get(
+            `${APIURL}/vehiculos/${patente}`
+          );
+          console.log(data);
+          statusFindPatente = status;
+          commit("setVehiculo", data);
+        } catch (e) {
+          console.error(e);
+        }
+        if (statusFindPatente === 200 && statusFindPatente !== undefined) {
+          const response = await axios.put(`${APIURL}/vehiculos/${patente}`, {
+            "content-type": "application/json",
+          });
+          console.log(response);
+
+          return true;
+        } else {
+          return false;
+        }
       } catch (e) {
         console.error(e.message);
-        commit("setStatus", false);
 
         return false;
       }
     },
-    async calcularMonto({ commit }, patente) {
+    async calcularMonto({ commit, dispatch }, patente) {
       try {
+        const response = await dispatch("egresoVehiculo", patente);
+        console.log(response);
         const { data } = await axios.get(`${APIURL}/calcular-monto/${patente}`);
         commit("setMontoAPagar", data.monto);
       } catch (e) {
@@ -67,6 +89,9 @@ export default new Vuex.Store({
     },
     setRegistros(state, registros) {
       state.registros = registros;
+    },
+    setVehiculo(state, v) {
+      state.vehiculo = v;
     },
   },
 });

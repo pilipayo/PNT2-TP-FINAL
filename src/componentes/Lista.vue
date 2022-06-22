@@ -10,17 +10,18 @@
             <th scope="col">Fecha</th>
             <th scope="col">Patente</th>
             <th scope="col">Pago</th>
-
           </tr>
         </thead>
         <tbody>
           <tr v-for="(registro, index) in registros" :key="index">
-            <td>{{ new Date(registro.fecha).toDateString() }}</td>
-            <td>{{ registro.patente }}</td>
-            <td>{{ registro.monto }}</td>
-
-
-
+            <td>{{ registro.fecha | pasarAFecha }}</td>
+            <td>{{ registro.patente | pasarAMayuscula }}</td>
+            <td>{{ registro.monto | toFixed }}</td>
+          </tr>
+          <tr>
+            <td>Total </td>
+            <td></td>
+            <td> {{ calcularTotalIngresos() | toFixed }}</td>
           </tr>
         </tbody>
       </table>
@@ -46,13 +47,15 @@ export default {
     }
   },
   methods: {
-
-  },
-  computed: {
-    registros() {
-      return this.$store.state.registros;
+    calcularTotalIngresos() {
+      let total = 0;
+      this.registros.map((registro) => {
+        total += registro.monto;
+      })
+      return total;
     }
-  }
+  },
+
 }
 
 

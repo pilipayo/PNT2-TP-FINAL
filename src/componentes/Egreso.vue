@@ -1,7 +1,7 @@
 <template>
 
   <section class="src-componentes-egreso">
-    <div class="jumbotron">
+    <div class="jumbotron" :style="{ background: colorDeFondo, color: colorDeTexto }">
       <h2><i>Egreso de Vehiculo</i></h2>
       <hr>
       <br>
@@ -31,9 +31,7 @@
       <div class="alert alert-danger" v-if="!status">
         El vehículo no está ingresado en el garage
       </div>
-      <div class="alert alert-danger" v-if="montoAPagar">
-        El monto a pagar es {{ montoAPagar }}
-      </div>
+      <MontoAPagar :monto="montoAPagar" v-if="montoAPagar" />
     </div>
   </section>
 
@@ -41,11 +39,15 @@
 
 <script>
 
+import MontoAPagar from './MontoAPagar.vue';
+
 export default {
-  name: 'src-componentes-ingreso',
+  name: "src-componentes-ingreso",
   props: [],
   mounted() {
-
+  },
+  beforeDestroy() {
+    this.$store.dispatch("limpiarMonto");
   },
   data() {
     return {
@@ -53,33 +55,26 @@ export default {
       formData: this.getInitialData(),
       patenteMinLength: 6,
       patenteMaxLength: 7,
-    }
+      colorDeFondo: "#d5e5ec",
+      colorDeTexto: "black",
+    };
   },
   methods: {
     getInitialData() {
       return {
         patente: null,
-      }
+      };
     },
     enviar() {
-      this.$store.dispatch("egresoVehiculo", this.formData.patente);
       if (this.status) {
         this.$store.dispatch("calcularMonto", this.formData.patente);
       }
-      this.formData = this.getInitialData()
-      this.formstate._reset()
-      console.log(this.formData)
+      this.formData = this.getInitialData();
+      this.formstate._reset();
     },
-
   },
-  computed: {
-    status() {
-      return this.$store.state.status;
-    },
-    montoAPagar() {
-      return this.$store.state.montoAPagar;
-    }
-  }
+
+  components: { MontoAPagar }
 }
 
 
@@ -89,8 +84,6 @@ export default {
 .src-componentes-ingreso {}
 
 .jumbotron {
-  background-color: #d5e5ec;
-  color: black;
   border: 2px inset rgb(0, 0, 0, 0.5);
 }
 
