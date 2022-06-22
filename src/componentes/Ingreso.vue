@@ -1,7 +1,7 @@
 <template>
 
   <section class="src-componentes-ingreso">
-    <div class="jumbotron">
+    <div class="jumbotron" :style="{ background: colorDeFondo, color: colorDeTexto }">
       <h2><i>Ingreso de Vehiculo</i></h2>
       <hr>
       <br>
@@ -58,6 +58,8 @@ export default {
       vehiculos: ["Moto", "Auto", "Camioneta"],
       patenteMinLength: 6,
       patenteMaxLength: 7,
+      colorDeFondo: "rgb(215, 233, 228)",
+      colorDeTexto: "black",
     }
   },
   methods: {
@@ -85,8 +87,7 @@ export default {
 .src-componentes-ingreso {}
 
 .jumbotron {
-  background-color: rgb(215, 233, 228);
-  color: rgb(0, 0, 0);
+
   border: 2px inset rgb(0, 0, 0, 0.5);
 }
 

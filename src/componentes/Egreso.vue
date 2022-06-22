@@ -1,7 +1,7 @@
 <template>
 
   <section class="src-componentes-egreso">
-    <div class="jumbotron">
+    <div class="jumbotron" :style="{ background: colorDeFondo, color: colorDeTexto }">
       <h2><i>Egreso de Vehiculo</i></h2>
       <hr>
       <br>
@@ -55,6 +55,8 @@ export default {
       formData: this.getInitialData(),
       patenteMinLength: 6,
       patenteMaxLength: 7,
+      colorDeFondo: "#d5e5ec", 
+      colorDeTexto:"black", 
     };
   },
   methods: {
@@ -83,8 +85,6 @@ export default {
 .src-componentes-ingreso {}
 
 .jumbotron {
-  background-color: #d5e5ec;
-  color: black;
   border: 2px inset rgb(0, 0, 0, 0.5);
 }
 
