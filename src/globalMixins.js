@@ -1,6 +1,12 @@
 import Vue from "vue";
 
 const mixinGlobal = {
+  data() {
+    return {
+      APIURL: "http://localhost:3000/api",
+    };
+  },
+  methods: {},
   computed: {
     registros() {
       return this.$store.state.registros;
@@ -10,6 +16,9 @@ const mixinGlobal = {
     },
     montoAPagar() {
       return this.$store.state.montoAPagar;
+    },
+    vehiculo() {
+      return this.$store.state.vehiculo;
     },
   },
 };

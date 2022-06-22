@@ -55,8 +55,8 @@ export default {
       formData: this.getInitialData(),
       patenteMinLength: 6,
       patenteMaxLength: 7,
-      colorDeFondo: "#d5e5ec", 
-      colorDeTexto:"black", 
+      colorDeFondo: "#d5e5ec",
+      colorDeTexto: "black",
     };
   },
   methods: {
@@ -66,7 +66,7 @@ export default {
       };
     },
     enviar() {
-      this.$store.dispatch("egresoVehiculo", this.formData.patente);
+      // this.$store.dispatch("egresoVehiculo", this.formData.patente);
       if (this.status) {
         this.$store.dispatch("calcularMonto", this.formData.patente);
       }

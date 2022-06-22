@@ -11,6 +11,7 @@ export default new Vuex.Store({
     status: true,
     montoAPagar: 0,
     registros: [],
+    vehiculo: null,
   },
   actions: {
     async postVehiculo({ commit }, vehiculo) {
@@ -27,37 +28,43 @@ export default new Vuex.Store({
         return false;
       }
     },
+
+    limpiarMonto({ commit }) {
+      commit("setMontoAPagar", 0);
+    },
     async egresoVehiculo({ commit }, patente) {
       try {
         let statusFindPatente;
         try {
-          const { status } = await axios.get(`${APIURL}/vehiculos/${patente}`);
+          const { data, status } = await axios.get(
+            `${APIURL}/vehiculos/${patente}`
+          );
+          console.log(data);
           statusFindPatente = status;
+          commit("setVehiculo", data);
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
         if (statusFindPatente === 200 && statusFindPatente !== undefined) {
-          await axios.put(`${APIURL}/vehiculos/${patente}`, {
+          const response = await axios.put(`${APIURL}/vehiculos/${patente}`, {
             "content-type": "application/json",
           });
-          commit("setStatus", true);
+          console.log(response);
+
           return true;
         } else {
-          commit("setStatus", false);
           return false;
         }
       } catch (e) {
         console.error(e.message);
-        commit("setStatus", false);
 
         return false;
       }
     },
-    limpiarMonto({ commit }) {
-      commit("setMontoAPagar", 0);
-    },
-    async calcularMonto({ commit }, patente) {
+    async calcularMonto({ commit, dispatch }, patente) {
       try {
+        const response = await dispatch("egresoVehiculo", patente);
+        console.log(response);
         const { data } = await axios.get(`${APIURL}/calcular-monto/${patente}`);
         commit("setMontoAPagar", data.monto);
       } catch (e) {
@@ -82,6 +89,9 @@ export default new Vuex.Store({
     },
     setRegistros(state, registros) {
       state.registros = registros;
+    },
+    setVehiculo(state, v) {
+      state.vehiculo = v;
     },
   },
 });
