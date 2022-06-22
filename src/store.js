@@ -36,13 +36,14 @@ export default new Vuex.Store({
         } catch (e) {
           console.log(e);
         }
-        if (statusFindPatente !== 404) {
+        if (statusFindPatente === 200 && statusFindPatente !== undefined) {
           await axios.put(`${APIURL}/vehiculos/${patente}`, {
             "content-type": "application/json",
           });
           commit("setStatus", true);
           return true;
         } else {
+          commit("setStatus", false);
           return false;
         }
       } catch (e) {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
 
         return false;
       }
+    },
+    limpiarMonto({ commit }) {
+      commit("setMontoAPagar", 0);
     },
     async calcularMonto({ commit }, patente) {
       try {

@@ -12,6 +12,8 @@ Vue.config.productionTip = false;
 import { router } from "./router";
 import "./form";
 import "./axios";
+import "./globalFilters";
+import "./globalMixins";
 
 import store from "./store";
 
