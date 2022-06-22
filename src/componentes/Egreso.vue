@@ -66,7 +66,6 @@ export default {
       };
     },
     enviar() {
-      // this.$store.dispatch("egresoVehiculo", this.formData.patente);
       if (this.status) {
         this.$store.dispatch("calcularMonto", this.formData.patente);
       }
