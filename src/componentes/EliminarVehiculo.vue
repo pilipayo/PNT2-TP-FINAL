@@ -1,5 +1,5 @@
-<template>  
-    
+<template>
+
   <section class="src-componentes-ingreso">
     <div class="jumbotron" :style="{ background: colorDeFondo, color: colorDeTexto }">
       <h2><i>Ingreso la patente del vehiculo a eliminar</i></h2>
@@ -31,6 +31,9 @@
 
 
     </div>
+    <div v-show="deleted" class="alert alert-danger mt-2">Vehīculo eliminado correctamente</div>
+    <div v-show="error" class="alert alert-danger mt-2">No se ha encontrado vehiculo en el listado</div>
+
   </section>
 
 </template>
@@ -60,7 +63,8 @@ export default {
       }
     },
     enviar() {
-      const dataToSend = { ...this.formData}
+      const dataToSend = this.formData.patente;
+      console.log(dataToSend);
       this.$store.dispatch("deleteVehiculo", dataToSend);
       this.formData = this.getInitialData();
       this.formstate._reset();

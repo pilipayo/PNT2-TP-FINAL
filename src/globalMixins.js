@@ -14,6 +14,15 @@ const mixinGlobal = {
     vehiculo() {
       return this.$store.state.vehiculo;
     },
+    vehiculos() {
+      return this.$store.state.vehiculos;
+    },
+    deleted() {
+      return this.$store.state.deleted;
+    },
+    error() {
+      return this.$store.state.error;
+    },
   },
 };
 

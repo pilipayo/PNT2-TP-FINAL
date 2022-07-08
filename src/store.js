@@ -13,6 +13,8 @@ export default new Vuex.Store({
     registros: [],
     vehiculo: null,
     vehiculos: [],
+    deleted: null,
+    error: null,
   },
   actions: {
     async postVehiculo({ commit }, vehiculo) {
@@ -29,22 +31,18 @@ export default new Vuex.Store({
         return false;
       }
     },
-      async deleteVehiculo(pat) {
-        console.log('deleteVehiculo', pat)
+    async deleteVehiculo({ commit }, pat) {
+      console.log("deleteVehiculo", pat);
 
-        try {
-          let { data: vehi } = await this.axios.delete(this.url+pat)
-          console.log('AXIOS DELETE usuario', vehi)
-
-          // this.getVehiculos()
-          let index = this.vehi.findIndex(user => user.id == vehi.pat)
-          if(index == -1) throw new Error('usuario no encontrado')
-          this.vehiculos.splice(index, 1)
-        }
-        catch(error) {
-          console.error('Error en deletePatente()', error.message)
-        }
-      },  
+      try {
+        let { data: vehi } = await axios.delete(`${APIURL}/vehiculos/${pat}`);
+        console.log("AXIOS DELETE usuario", vehi);
+        commit("setDeleted", vehi);
+      } catch (error) {
+        commit("setError", error.message);
+        console.error("Error en deletePatente()", error.message);
+      }
+    },
 
     limpiarMonto({ commit }) {
       commit("setMontoAPagar", 0);
@@ -96,6 +94,14 @@ export default new Vuex.Store({
         console.error(e.message);
       }
     },
+    async getVehiculos({ commit }) {
+      try {
+        const { data } = await axios.get(`${APIURL}/vehiculos`);
+        commit("setVehiculos", data);
+      } catch (e) {
+        console.error(e.message);
+      }
+    },
   },
   mutations: {
     setStatus(state, status) {
@@ -109,6 +115,15 @@ export default new Vuex.Store({
     },
     setVehiculo(state, v) {
       state.vehiculo = v;
+    },
+    setDeleted(state, v) {
+      state.deleted = v;
+    },
+    setVehiculos(state, all) {
+      state.vehiculos = all;
+    },
+    setError(state, e) {
+      state.error = e;
     },
   },
 });
