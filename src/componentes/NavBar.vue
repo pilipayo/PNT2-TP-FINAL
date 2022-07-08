@@ -32,6 +32,13 @@
               <a class="nav-link" href="#">Lista</a>
             </router-link>
           </li>
+
+          
+          <li class="nav-item">
+            <router-link to="/eliminarVechiculoi">
+              <a class="nav-link" href="#">Eliminar Vehiculo</a>
+            </router-link>
+          </li>
         </ul>
       </div>
     </nav>

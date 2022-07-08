@@ -17,7 +17,9 @@
             <td>{{ registro.fecha | pasarAFecha }}</td>
             <td>{{ registro.patente | pasarAMayuscula }}</td>
             <td>{{ registro.monto | toFixed }}</td>
+            <!-- <td><button class="btn btn-danger mt-3" @click="deleteRegistro(registro.patente)">Borrar</button></td> -->
           </tr>
+
           <tr>
             <td>Total </td>
             <td></td>
@@ -53,7 +55,7 @@ export default {
         total += registro.monto;
       })
       return total;
-    }
+    }, 
   },
 
 }

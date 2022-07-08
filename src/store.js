@@ -12,6 +12,7 @@ export default new Vuex.Store({
     montoAPagar: 0,
     registros: [],
     vehiculo: null,
+    vehiculos: [],
   },
   actions: {
     async postVehiculo({ commit }, vehiculo) {
@@ -28,6 +29,22 @@ export default new Vuex.Store({
         return false;
       }
     },
+      async deleteVehiculo(pat) {
+        console.log('deleteVehiculo', pat)
+
+        try {
+          let { data: vehi } = await this.axios.delete(this.url+pat)
+          console.log('AXIOS DELETE usuario', vehi)
+
+          // this.getVehiculos()
+          let index = this.vehi.findIndex(user => user.id == vehi.pat)
+          if(index == -1) throw new Error('usuario no encontrado')
+          this.vehiculos.splice(index, 1)
+        }
+        catch(error) {
+          console.error('Error en deletePatente()', error.message)
+        }
+      },  
 
     limpiarMonto({ commit }) {
       commit("setMontoAPagar", 0);
