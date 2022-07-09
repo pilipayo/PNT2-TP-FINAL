@@ -31,8 +31,8 @@
 
 
     </div>
-    <div v-show="deleted" class="alert alert-danger mt-2">Vehīculo eliminado correctamente</div>
-    <div v-show="error" class="alert alert-danger mt-2">No se ha encontrado vehiculo en el listado</div>
+    <div v-show="deleted" class="alert alert-danger mt-2">Vehículo eliminado correctamente</div>
+    <div v-show="error" class="alert alert-danger mt-2">No se ha encontrado el vehiculo en el listado</div>
 
   </section>
 
@@ -43,8 +43,8 @@
 export default {
   name: 'src-componentes-ingreso',
   props: [],
-  mounted() {
-
+  beforeMount(){
+      this.$store.dispatch("setDeletedAndError")
   },
   data() {
     return {

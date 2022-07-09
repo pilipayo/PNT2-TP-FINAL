@@ -38,8 +38,10 @@ export default new Vuex.Store({
         let { data: vehi } = await axios.delete(`${APIURL}/vehiculos/${pat}`);
         console.log("AXIOS DELETE usuario", vehi);
         commit("setDeleted", vehi);
+        commit("setError", false);
       } catch (error) {
         commit("setError", error.message);
+        commit("setDeleted", false);
         console.error("Error en deletePatente()", error.message);
       }
     },
@@ -103,6 +105,10 @@ export default new Vuex.Store({
         console.error(e.message);
       }
     },
+    setDeletedAndError({commit}){
+      commit("setDeleted", false)
+      commit("setError", false)
+    }
   },
   mutations: {
     setStatus(state, status) {
