@@ -14,7 +14,7 @@ import "./form";
 import "./axios";
 import "./globalFilters";
 import "./globalMixins";
-
+import './directivas'
 import store from "./store";
 
 new Vue({

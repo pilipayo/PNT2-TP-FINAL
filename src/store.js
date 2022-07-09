@@ -84,6 +84,7 @@ export default new Vuex.Store({
         commit("setMontoAPagar", data.monto);
       } catch (e) {
         console.error(e.message);
+        // commit("setStatus", false);
       }
     },
     async obtenerListado({ commit }) {

@@ -21,7 +21,7 @@
         <validate tag="div">
           <label for="patente">Patente</label>
           <input type="text" id="patente" name="patente" class="form-control" autocomplete="off"
-            v-model.trim="formData.patente" required :minlength="patenteMinLength" :maxlength="patenteMaxLength" />
+            v-model.trim="formData.patente" required :minlength="patenteMinLength" :maxlength="patenteMaxLength" v-uppercase />
           <field-messages name="patente" show="$dirty">
             <div slot="required" class="alert alert-danger mt-1">Este campo es obligatorio</div>
             <div slot="minlength" class="alert alert-danger mt-1">
